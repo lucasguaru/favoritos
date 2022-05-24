@@ -24,9 +24,11 @@ body {
   margin: auto;
   padding: 5px;
   margin-bottom: 10px;
+
 }
 .input input {
-  width: 100%;
+  width: 98%;
+  margin: auto;
 }
 
 .result {
@@ -37,5 +39,47 @@ body {
 }
 
 .result .row {
-  background-color: blueviolet;
+  /* background-color: rgb(228, 228, 228); */
+  margin-bottom: 15px;
+}
+.result div {
+  /* border: 1px solid red; */
+}
+
+.result .row .bookmark-url {
+  padding: 2px;
+  font-size: 0.7rem;
+}
+
+.result .row .bookmark-title {
+  padding: 5px;
+  font-size: 0.9rem;
+}
+
+.result .row .bookmark-description {
+  padding: 5px;
+  font-size: 0.75rem;
+}
+
+.result .row .bookmark-tag {
+  padding: 5px;
+  font-size: 0.65rem;
+}
+a {
+  color: #1a0dab;
+}
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: underline;
 }

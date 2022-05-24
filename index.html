@@ -21,14 +21,17 @@
       
     </div>
     <div class="input">
-      <input type="text" placeholder="Type your search">
+      <input type="text" placeholder="Type your search" ng-model="search">
     </div>
   </div>
   <div class="result">
-    <div class="row" ng-repeat="bookmark in bookmarks">
-      <div class="bookmark-title">{{bookmark.title}}</div>
+    <div class="row" ng-repeat="bookmark in bookmarks | filterByInput:search">
+      <a href="{{bookmark.url}}">
+        <div class="bookmark-url">{{bookmark.url}}</div>
+        <div class="bookmark-title">{{bookmark.title}}</div>
+      </a>
       <div class="bookmark-description">{{bookmark.description}}</div>
-      <div class="bookmark-tag">{{bookmark.tags}}</div>
+      <div class="bookmark-tag">Tags: {{bookmark.tags}}</div>
     </div>
   </div>
 </body>

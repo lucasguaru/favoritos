@@ -3,21 +3,43 @@ let bookmarkApp = angular.module('bookmarkApp', []);
 bookmarkApp.controller('BookmarkController', function BookmarkController($scope) {
   const vm = $scope;
 
-  vm.bookmarks = [{
-      title: 'Solution Intent Integração Brain',
-      url: 'https://confluence.bradesco.com.br:8443/pages/viewpage.action?pageId=199361752',
-      description: 'Solution Intent Integração Brain',
-      tags: ['Integração Brain', 'Confluence']
-    },{
-      title: 'Srv Registration Swagger',
-      url: 'https://confluence.bradesco.com.br:8443/pages/viewpage.action?pageId=199361752',
-      description: 'Srv Registration Swagger',
-      tags: ['Swagger']
-    },{
-      title: 'Artefatos Arquitetura',
-      url: 'https://bitbucket.bradesco.com.br:8443/projects/PLDPJ/repos/pdpj-srv-design-authority/browse',
-      description: 'Srv Registration Swagger',
-      tags: ['bitbucket']
-    }
-  ];
+  let bookmarks = localStorage.getItem("bookmarks");
+  if (!bookmarks) {
+    bookmarks = [];
+  } else {
+    bookmarks = JSON.parse(bookmarks);
+  }
+
+  vm.bookmarks = bookmarks;
 });
+
+bookmarkApp.filter('filterByInput', function() {
+  function break3Letters(filterInput) {
+    let res = [];
+    while (filterInput.length > 3)  {
+      res.push(filterInput.substring(0, 3));
+      filterInput = filterInput.substring(3);
+    }
+    res.push(filterInput);
+    return res;
+  }
+  function contains(full, filterInput) {
+    let words = break3Letters(filterInput.toLowerCase());
+    let found = true;
+    for (let i = 0; i < words.length; i++) {
+      if (full.toLowerCase().indexOf(words[i]) < 0) {
+        found = false;
+        break;
+      }
+    }
+    return found;
+  }
+
+  return function(arr, filterInput) {
+    if (!filterInput) return arr;
+    return arr.filter(item => {
+      return contains(item.title, filterInput);
+    })
+
+  }
+})
