@@ -1,6 +1,6 @@
 let bookmarkApp = angular.module('bookmarkApp', []);
 
-bookmarkApp.controller('BookmarkController', function BookmarkController($scope) {
+bookmarkApp.controller('BookmarkController', ['filterByInput', function BookmarkController($scope) {
   const vm = $scope;
 
   let bookmarks = localStorage.getItem("bookmarks");
@@ -11,7 +11,7 @@ bookmarkApp.controller('BookmarkController', function BookmarkController($scope)
   }
 
   vm.bookmarks = bookmarks;
-});
+}]);
 
 bookmarkApp.filter('filterByInput', function() {
   function break3Letters(filterInput) {
