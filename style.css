@@ -1,0 +1,41 @@
+body {
+  font-family: Verdana;
+  box-sizing: border-box;
+}
+
+.header {
+  text-align: center;
+  font-weight: 900;
+  font-size: 2rem;
+  height: 80px;
+}
+
+.tags {
+  height: 40px;
+  background-color: lightblue;
+  margin-bottom: 10px;
+}
+
+.input {
+  height: 40px;
+  background-color: lightblue;
+  margin-bottom: 10px;
+  max-width: 600px;
+  margin: auto;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+.input input {
+  width: 100%;
+}
+
+.result {
+  margin-bottom: 10px;
+  max-width: 600px;
+  margin: auto;
+  padding: 5px;
+}
+
+.result .row {
+  background-color: blueviolet;
+}

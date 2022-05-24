@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="bookmarkApp">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bookmark</title>
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="app/app.js"></script>
+</head>
+<script>
+
+
+</script>
+<body ng-controller="BookmarkController">
+  <div class="header">Bookmark</div>
+  <div class="search">
+    <div class="tags">
+      
+    </div>
+    <div class="input">
+      <input type="text" placeholder="Type your search">
+    </div>
+  </div>
+  <div class="result">
+    <div class="row" ng-repeat="bookmark in bookmarks">
+      <div class="bookmark-title">{{bookmark.title}}</div>
+      <div class="bookmark-description">{{bookmark.description}}</div>
+      <div class="bookmark-tag">{{bookmark.tags}}</div>
+    </div>
+  </div>
+</body>
+</html>
