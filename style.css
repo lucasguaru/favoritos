@@ -42,6 +42,7 @@ body {
   /* background-color: rgb(228, 228, 228); */
   margin-bottom: 15px;
   border-radius: 7px;
+  cursor: pointer;
 }
 .result div {
   /* border: 1px solid red; */
@@ -60,7 +61,10 @@ body {
   font-weight: 800;
 }
 .row.selected {
-  background-color: rgb(215, 214, 255);
+  background-color: rgb(200 199 255 / 38%)
+}
+.row:hover {
+  background-color: rgb(200 199 255 / 20%)
 }
 
 .result .row .bookmark-description {
