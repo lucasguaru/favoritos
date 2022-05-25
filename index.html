@@ -28,9 +28,16 @@
     <div class="input">
       <input id="search" type="text" placeholder="Type your search" ng-model="search">
     </div>
+    <div id="addNewDiv" class="add-new">
+      <div class="input-row"><label for="title">Title: </label><input id="title" type="text" ng-model="newItem.title"></div>
+      <div class="input-row"><label for="url">URL: </label><input id="title" type="text" ng-model="newItem.url"></div>
+      <div class="input-row"><label for="description">Description: </label><input id="description" type="text" ng-model="newItem.description"></div>
+      <div class="input-row"><label for="tags">Tags: </label><input id="tags" type="text" ng-model="newItem.tags"></div>
+      <div class="input-button"><input type="button" value="Salvar" ng-click="saveItem(newItem)"></div>
+    </div>
   </div>
   <div class="result">
-    <div class="row" ng-class="{'selected': $index == selected}" ng-repeat="bookmark in bookmarks | filterByInput:search">
+    <div class="row" ng-class="{'selected': $index == selected}" ng-repeat="bookmark in bookmarks | filterByInput:search track by $index">
       <a href="{{bookmark.url}}" target="_blank">
         <div class="bookmark-url">{{bookmark.url}} = {{$index}}</div>
         <div class="bookmark-title" ng-bind-html="bookmark.title | colorByInput:search"></div>
