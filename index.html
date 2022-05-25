@@ -8,9 +8,12 @@
   <link rel="stylesheet" href="style.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js"></script>
   <script src="app/app.js"></script>
-  <script src="app/filterByInput.js"></script>
-  <script src="app/bookmark-controller.js"></script>
+  <script src="app/contains.function.js"></script>
+  <script src="app/byInput.filter.js"></script>
+  <script src="app/colorByInput.filter.js"></script>
+  <script src="app/bookmark.controller.js"></script>
 </head>
 <script>
 
@@ -23,18 +26,23 @@
       
     </div>
     <div class="input">
-      <input type="text" placeholder="Type your search" ng-model="search">
+      <input id="search" type="text" placeholder="Type your search" ng-model="search">
     </div>
   </div>
   <div class="result">
-    <div class="row" ng-repeat="bookmark in bookmarks | filterByInput:search">
-      <a href="{{bookmark.url}}">
-        <div class="bookmark-url">{{bookmark.url}}</div>
-        <div class="bookmark-title">{{bookmark.title}}</div>
+    <div class="row" ng-class="{'selected': $index == selected}" ng-repeat="bookmark in bookmarks | filterByInput:search">
+      <a href="{{bookmark.url}}" target="_blank">
+        <div class="bookmark-url">{{bookmark.url}} = {{$index}}</div>
+        <div class="bookmark-title" ng-bind-html="bookmark.title | colorByInput:search"></div>
       </a>
       <div class="bookmark-description">{{bookmark.description}}</div>
       <div class="bookmark-tag">Tags: {{bookmark.tags}}</div>
     </div>
   </div>
 </body>
+<script>
+  window.onload = function() {
+    document.getElementById("search").focus();
+  }
+</script>
 </html>

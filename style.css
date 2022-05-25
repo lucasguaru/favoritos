@@ -41,6 +41,7 @@ body {
 .result .row {
   /* background-color: rgb(228, 228, 228); */
   margin-bottom: 15px;
+  border-radius: 7px;
 }
 .result div {
   /* border: 1px solid red; */
@@ -54,6 +55,12 @@ body {
 .result .row .bookmark-title {
   padding: 5px;
   font-size: 0.9rem;
+}
+.row .spotlight {
+  font-weight: 800;
+}
+.row.selected {
+  background-color: rgb(215, 214, 255);
 }
 
 .result .row .bookmark-description {
