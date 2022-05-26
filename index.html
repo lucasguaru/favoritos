@@ -31,6 +31,7 @@
         <input id="bookmarkSearch" type="text" placeholder="Type your search" ng-model="bookmarkSearch" ng-keyup="filter($event, bookmarkSearch)">
         <div class="input-actions">
           <button ng-click="newMode=true">Add New</button>
+          <button ng-click="export()">Export</button>
         </div>
       </div>
       <div ng-if="newMode || editMode" id="addNewDiv" class="add-new">

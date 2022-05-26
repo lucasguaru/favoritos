@@ -34,6 +34,18 @@ controller('BookmarkController', function BookmarkController($scope) {
     vm.editMode = true;
   }
 
+  function download(content, fileName, contentType) {
+    const a = document.createElement("a");
+    const file = new Blob([content], { type: contentType });
+    a.href = URL.createObjectURL(file);
+    a.download = fileName;
+    a.click();
+   }
+
+  vm.export = function() {
+    download(JSON.stringify(vm.filteredBookmarks), "filtered-bookmark.json", "text/plain");
+  }
+
   vm.openPage = function(bookmark) {
     bookmark.qtyClicks = (bookmark.qtyClicks || 0) + 1;
     pushToSearchList(bookmark);
