@@ -76,11 +76,15 @@ controller('BookmarkController', function BookmarkController($scope) {
     return false;
   }
 
+  vm.selectHotkey = function(tag) {
+    tag.selected = !tag.selected;
+  }
+
   function hotKeyTag(event) {
     if (!(event.altKey && between(event.keyCode, 48, 57))) return false;
 
     let pos = event.keyCode - 48;
-    vm.tags[pos].selected = !vm.tags[pos].selected;
+    vm.selectHotkey(vm.tags[pos]);
 
     return true;
   }

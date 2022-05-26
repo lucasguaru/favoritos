@@ -25,7 +25,7 @@
     <div class="search">
       <div class="tags">
         <div class="title">Tags:</div>
-        <div class="button" ng-class="{'selected': tag.selected}" ng-repeat="tag in tags track by $index">{{tag.name}} <span class="command">[alt + {{$index}}]</div></button>
+        <div class="button" ng-class="{'selected': tag.selected}" ng-repeat="tag in tags track by $index" ng-click="selectHotkey(tag)">{{tag.name}} <span class="command">[alt + {{$index}}]</div></button>
       </div>
       <div class="input">
         <input id="bookmarkSearch" type="text" placeholder="Type your search" ng-model="bookmarkSearch" ng-keyup="filter($event, bookmarkSearch)">
