@@ -4,9 +4,10 @@ controller('BookmarkController', function BookmarkController($scope) {
 
   vm.selected = 0;
   vm.newItem = {};
+  vm.newMode = false;
   vm.editMode = false;
 
-  let bookmarks = loadStorage();
+  let bookmarks = loadStorageBookmarks();
   if (!bookmarks) {
     bookmarks = [];
   } else {
@@ -14,18 +15,23 @@ controller('BookmarkController', function BookmarkController($scope) {
   }  
   vm.bookmarks = bookmarks;
   vm.filteredBookmarks = vm.bookmarks;
+  vm.tags = loadTags(vm.filteredBookmarks);
 
   vm.saveItem = function(item) {
-    vm.bookmarks.push(item);
-    saveStorage();
+    if (vm.newMode) {
+      vm.bookmarks.push(item);
+    }
+    saveStorageBookmarks();
     vm.newItem = {};
+    vm.newMode = false;
     vm.editMode = false;
   }
 
-  vm.filter = function(event, search) {
-    if (vm.isCommandKey(event)) return;
-    vm.filteredBookmarks = filterByInput(vm.bookmarks, search);
-    vm.selected = 0;
+  vm.edit = function(event, index) {
+    // console.log(event);
+    event.stopPropagation();
+    vm.newItem = vm.filteredBookmarks[index];
+    vm.editMode = true;
   }
 
   vm.openPage = function(bookmark) {
@@ -42,42 +48,97 @@ controller('BookmarkController', function BookmarkController($scope) {
         bookmark.searchList.push({search: vm.search, qty: 1});
       }
       
-      saveStorage();
+      saveStorageBookmarks();
     }
+  }
+
+  vm.filter = function(event, search) {
+    if (vm.isCommandKey(event)) return;
+    vm.filteredBookmarks = filterByInput(vm.bookmarks, search);
+    vm.selected = 0;
   }
 
   vm.isCommandKey = function(event) {
     // console.log({length: vm.filteredBookmarks.length, selected: vm.selected});
-    if (event.key == 'ArrowDown') {
-      if (vm.selected < vm.filteredBookmarks.length -1) {
-        vm.selected++;
-      }
+    if (moveDown(event)) {
       return true;
     }
-    if (event.key == 'ArrowUp') {
-      if (vm.selected > 0) {
-        vm.selected--;
-      }
+    if (moveUp(event)) {
       return true;
     }
-    if (event.key == 'Enter') {
-      vm.openPage(vm.filteredBookmarks[vm.selected]);
+    if (isOpenPage(event)) {
       return true;
     }
-    console.log(event);
+    if (hotKeyTag(event)) {
+      return true;
+    }
+    // console.log(event);
     return false;
   }
 
+  function hotKeyTag(event) {
+    if (!(event.altKey && between(event.keyCode, 48, 57))) return false;
 
-  function saveStorage() {
+    let pos = event.keyCode - 48;
+    vm.tags[pos].selected = !vm.tags[pos].selected;
+
+    return true;
+  }
+  function moveDown(event) {
+    if (event.key != 'ArrowDown') return false;
+
+    if (vm.selected < vm.filteredBookmarks.length -1) {
+      vm.selected++;
+    }
+    return true;
+  }
+  function moveUp(event) {
+    if (event.key != 'ArrowUp') return false;
+
+    if (vm.selected > 0) {
+      vm.selected--;
+    }
+    return true;
+  }
+  function isOpenPage(event) {
+    if (event.key != 'Enter') return false;
+
+    vm.openPage(vm.filteredBookmarks[vm.selected]);
+    return true;
+  }
+
+  function loadTags(bookmarks) {
+    let tags = [];
+    bookmarks.forEach(b => {
+      if (Array.isArray(b.tags)) {
+        tags = tags.concat(b.tags.map(t => ({name: t, selected: false})));
+      } else {
+        tags.push({name: b.tags, selected: false});
+      }
+    });
+    return [...new Set(tags)];
+  }
+
+  function saveStorageBookmarks() {
     localStorage.setItem("bookmarks", JSON.stringify(vm.bookmarks));
   }
 
-  function loadStorage() {
+  function loadStorageBookmarks() {
     const bookmarks = localStorage.getItem("bookmarks");
     console.log(`localStorage.setItem("bookmarks", ${bookmarks})`);
     return bookmarks;
   }
+
+  function between(value, start, end) {
+    return value >= start && value <= end;
+  }
+  
+
+  // function loadStorageTags() {
+  //   const tags = localStorage.getItem("tags");
+  //   console.log(`localStorage.setItem("tags", ${tags})`);
+  //   return tags;
+  // }
 
   //JSON.parse(localStorage.getItem("bookmarks"))
 });

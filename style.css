@@ -2,6 +2,10 @@ body {
   font-family: Verdana;
   box-sizing: border-box;
 }
+.container {
+  margin-left: 5px;
+  margin-right: 5px;
+}
 
 .header {
   text-align: center;
@@ -11,10 +15,37 @@ body {
 }
 
 .tags {
-  height: 40px;
+  /* height: 40px; */
   background-color: lightblue;
   margin-bottom: 10px;
+  /* overflow: auto; */
 }
+
+.tags .button {
+  font-size: .6rem;
+  background-color: #d4d4da;
+  display: inline;
+  margin: 3px;
+  padding: 2px 4px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.tags .button.selected {
+  background-color: #b2afd6;
+}
+
+.tags .button .command {
+  font-size: .5rem;
+  /* font-size: .6rem;
+  background-color: #b2afd6;
+  display: inline;
+  margin: 3px;
+  padding: 2px 4px;
+  border-radius: 4px; */
+}
+
+command
 
 .input {
   height: 40px;
@@ -35,28 +66,48 @@ body {
   margin-bottom: 10px;
   max-width: 600px;
   margin: auto;
-  padding: 5px;
+  /* padding: 5px; */
 }
 
 .result .row {
   /* background-color: rgb(228, 228, 228); */
   margin-bottom: 15px;
   border-radius: 7px;
+  padding: 8px;
   cursor: pointer;
+  /* border: 1px solid red; */
 }
 .result div {
   /* border: 1px solid red; */
 }
 
 .result .row .bookmark-url {
-  padding: 2px;
   font-size: 0.7rem;
+  margin-bottom: 5px;
 }
 
 .result .row .bookmark-title {
-  padding: 5px;
   font-size: 0.9rem;
+  overflow: auto;
+  margin-bottom: 5px;
+  /* border: 1px solid red; */
 }
+.result .row .bookmark-title .content {
+  float: left;
+  /* border: 1px solid blue; */
+}
+.result .row .bookmark-title .actions {
+  float: right;
+  font-size: 0.54rem;
+  /* border: 1px solid blue; */
+}
+.result .row .bookmark-title .actions:hover {
+  float: right;
+  font-size: 0.54rem;  
+  text-decoration: underline;
+  /* border: 1px solid blue; */
+}
+
 .row .spotlight {
   font-weight: 800;
 }
@@ -68,12 +119,14 @@ body {
 }
 
 .result .row .bookmark-description {
-  padding: 5px;
+  /* padding: 5px; */
+  margin-bottom: 5px;
   font-size: 0.75rem;
 }
 
 .result .row .bookmark-tag {
-  padding: 5px;
+  /* padding: 5px; */
+  margin-bottom: 5px;
   font-size: 0.65rem;
 }
 a {

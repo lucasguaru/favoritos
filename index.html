@@ -20,37 +20,40 @@
 
 </script>
 <body ng-controller="BookmarkController">
-  <div class="header">Bookmark</div>
-  <div class="search">
-    <div class="tags">
-      
-    </div>
-    <div class="input">
-      <input id="search" type="text" placeholder="Type your search" ng-model="search" ng-keyup="filter($event, search)">
-      <div class="input-actions">
-        <button ng-click="editMode=true">Add New</button>
+  <div class="container">
+    <div class="header">Bookmark</div>
+    <div class="search">
+      <div class="tags">
+        <div class="title">Tags:</div>
+        <div class="button" ng-class="{'selected': tag.selected}" ng-repeat="tag in tags track by $index">{{tag.name}} <span class="command">[alt + {{$index}}]</div></button>
+      </div>
+      <div class="input">
+        <input id="bookmarkSearch" type="text" placeholder="Type your search" ng-model="bookmarkSearch" ng-keyup="filter($event, bookmarkSearch)">
+        <div class="input-actions">
+          <button ng-click="newMode=true">Add New</button>
+        </div>
+      </div>
+      <div ng-if="newMode || editMode" id="addNewDiv" class="add-new">
+        <div class="input-row"><label for="title">Title: </label><input id="title" type="text" ng-model="newItem.title"></div>
+        <div class="input-row"><label for="url">URL: </label><input id="title" type="text" ng-model="newItem.url"></div>
+        <div class="input-row"><label for="description">Description: </label><input id="description" type="text" ng-model="newItem.description"></div>
+        <div class="input-row"><label for="tags">Tags: </label><input id="tags" type="text" ng-model="newItem.tags"></div>
+        <div class="input-button"><input type="button" value="Salvar" ng-click="saveItem(newItem)"></div>
       </div>
     </div>
-    <div ng-if="editMode" id="addNewDiv" class="add-new">
-      <div class="input-row"><label for="title">Title: </label><input id="title" type="text" ng-model="newItem.title"></div>
-      <div class="input-row"><label for="url">URL: </label><input id="title" type="text" ng-model="newItem.url"></div>
-      <div class="input-row"><label for="description">Description: </label><input id="description" type="text" ng-model="newItem.description"></div>
-      <div class="input-row"><label for="tags">Tags: </label><input id="tags" type="text" ng-model="newItem.tags"></div>
-      <div class="input-button"><input type="button" value="Salvar" ng-click="saveItem(newItem)"></div>
-    </div>
-  </div>
-  <div class="result">
-    <div class="row" ng-click="openPage(bookmark)" ng-class="{'selected': $index == selected}" ng-repeat="bookmark in filteredBookmarks track by $index">
-      <div class="bookmark-url">{{bookmark.url}} = {{$index}}</div>
-      <div class="bookmark-title" ng-bind-html="bookmark.title | colorByInput:search"></div>
-      <div class="bookmark-description">{{bookmark.description}}</div>
-      <div class="bookmark-tag">Tags: {{bookmark.tags}}</div>
+    <div class="result">
+      <div class="row" ng-click="openPage(bookmark)" ng-class="{'selected': $index == selected}" ng-repeat="bookmark in filteredBookmarks track by $index">
+        <div class="bookmark-url">{{bookmark.url}}</div>
+        <div class="bookmark-title"><div class="content" ng-bind-html="bookmark.title | colorByInput:bookmarkSearch"></div><div class="actions" ng-click="edit($event, $index)">[Edit]</div></div>
+        <div class="bookmark-description">{{bookmark.description}}</div>
+        <div class="bookmark-tag">Tags: {{bookmark.tags}}</div>
+      </div>
     </div>
   </div>
 </body>
 <script>
   window.onload = function() {
-    document.getElementById("search").focus();
+    document.getElementById("bookmarkSearch").focus();
   }
 </script>
 </html>
