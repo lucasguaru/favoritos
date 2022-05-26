@@ -5,6 +5,8 @@ body {
 .container {
   margin-left: 5px;
   margin-right: 5px;
+  max-width: 800px;
+  margin: auto;
 }
 
 .header {
@@ -64,8 +66,8 @@ command
 
 .result {
   margin-bottom: 10px;
-  max-width: 600px;
-  margin: auto;
+  /* max-width: 600px; */
+  /* margin: auto; */
   /* padding: 5px; */
 }
 
