@@ -29,6 +29,15 @@ body {
   border-radius: 4px;
 }
 
+.edit-tags .command {
+  cursor: pointer;
+}
+
+.edit-tags .command:hover {
+  /* cursor: pointer; */
+  text-decoration: underline;
+}
+
 .tags {
   /* height: 40px; */
   background-color: lightblue;
@@ -116,7 +125,7 @@ body {
 }
 .result .row .bookmark-title .actions:hover {
   float: right;
-  font-size: 0.54rem;  
+  font-size: 0.54rem;
   text-decoration: underline;
   /* border: 1px solid blue; */
 }

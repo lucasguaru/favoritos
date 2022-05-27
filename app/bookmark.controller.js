@@ -74,6 +74,26 @@ controller('BookmarkController', function BookmarkController($scope) {
     vm.selected = 0;
   }
 
+  vm.filterOnlyUnused = function(allTags, alreadySelectedTags) {
+    return allTags.filter(t => !alreadySelectedTags.includes(t.name));
+  }
+
+  vm.addTag = function() {
+    let arrTags = vm.newItem.tags || [];
+    vm.newItem.tags = arrTags;
+
+    if (vm.newItem.tagSelection == '9999') {
+      vm.newItem.tags.push(vm.newItem.inputNewTag);
+    } else {
+      vm.newItem.tags.push(vm.tags[vm.newItem.tagSelection].name);
+    }
+    // item.tags vm.tags[item.tagSelection];
+  }
+  
+  vm.deleteTagItem = function(index) {
+    vm.newItem.tags.splice(index, 1);
+  }
+
   vm.isCommandKey = function(event) {
     // console.log({length: vm.filteredBookmarks.length, selected: vm.selected});
     if (moveDown(event)) {

@@ -40,14 +40,14 @@
         <div class="input-row"><label for="description">Description: </label><input id="description" type="text" ng-model="newItem.description"></div>
         <div class="input-row">
           <label for="tags">Tags: </label>
-          <div class="edit-tags"><div class="tag" ng-repeat="tag in newItem.tags">{{tag}}</div></div>
+          <div class="edit-tags"><div class="tag" ng-repeat="tag in newItem.tags track by $index">{{tag}} <span class="command" ng-click="deleteTagItem($index)">[X]</span></div></div>
           <select name="tagSelection" id="tagSelection" ng-model="newItem.tagSelection">
-            <option value="9999">Add new tag</option>
-            <option ng-repeat="tag in tags track by $index" value="{{$index}}">{{tag.name}}</option>
+            <option value="9999">* Add new tag</option>
+            <option ng-repeat="tag in filterOnlyUnused(tags, newItem.tags) track by $index" value="{{$index}}">{{tag.name}}</option>
           </select>
-          <input ng-if="newItem.tagSelection == 9999" id="tags" type="text" ng-model="newItem.inputNewTag">
+          <input ng-if="newItem.tagSelection == 9999" id="tags" type="text" ng-model="newItem.inputNewTag"><input type="button" ng-click="addTag()" value="Add Tag">
         </div>
-        <div class="input-button"><input type="button" value="Salvar" ng-click="saveItem(newItem)"></div>
+        <div class="input-button"><input type="button" value="Save" ng-click="saveItem(newItem)"></div>
       </div>
     </div>
     <div class="result">
