@@ -64,9 +64,13 @@ controller('BookmarkController', function BookmarkController($scope) {
     }
   }
 
-  vm.filter = function(event, search) {
-    if (vm.isCommandKey(event)) return;
-    vm.filteredBookmarks = filterByInput(vm.bookmarks, search);
+  function getSelectedTags() {
+    return vm.tags.filter(t => t.selected);
+  }
+
+  vm.filter = function(event) {
+    if (event && vm.isCommandKey(event)) return;
+    vm.filteredBookmarks = filterByInput(vm.bookmarks, vm.bookmarkSearch, getSelectedTags());
     vm.selected = 0;
   }
 
@@ -90,6 +94,7 @@ controller('BookmarkController', function BookmarkController($scope) {
 
   vm.selectHotkey = function(tag) {
     tag.selected = !tag.selected;
+    vm.filter();
   }
 
   function hotKeyTag(event) {

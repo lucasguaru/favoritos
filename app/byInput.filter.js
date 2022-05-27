@@ -1,6 +1,10 @@
-function filterByInput(arr, filterInput) {
-  if (!filterInput) return arr;
-  return arr.filter(item => {
+function filterByInput(arr, filterInput, selectedTags) {
+  let resultArray = arr;
+  if (selectedTags && selectedTags.length) {
+    resultArray = resultArray.filter(item => selectedTags.every(v => item.tags.includes(v.name)));
+  }
+  if (!filterInput) return resultArray;
+  return resultArray.filter(item => {
     return contains(item.title, filterInput).found;
   });
 }

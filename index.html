@@ -28,7 +28,7 @@
         <div class="button" ng-class="{'selected': tag.selected}" ng-repeat="tag in tags track by $index" ng-click="selectHotkey(tag)">{{tag.name}} <span class="command">[alt + {{$index}}]</div></button>
       </div>
       <div class="input">
-        <input id="bookmarkSearch" type="text" placeholder="Type your search" ng-model="bookmarkSearch" ng-keyup="filter($event, bookmarkSearch)">
+        <input id="bookmarkSearch" type="text" placeholder="Type your search" ng-model="bookmarkSearch" ng-keyup="filter($event)">
         <div class="input-actions">
           <button ng-click="newMode=true">Add New</button>
           <button ng-click="export()">Export</button>
