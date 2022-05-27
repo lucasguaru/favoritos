@@ -2,6 +2,7 @@ angular.module('bookmarkApp').
 controller('BookmarkController', function BookmarkController($scope) {
   const vm = $scope;
 
+  vm.bookmarkSearch = "";
   vm.selected = 0;
   vm.newItem = {};
   vm.newMode = false;
@@ -53,11 +54,11 @@ controller('BookmarkController', function BookmarkController($scope) {
 
     function pushToSearchList(bookmark) {
       bookmark.searchList = bookmark.searchList || [];
-      const found = bookmark.searchList.find(input => input.search == vm.search);
+      const found = bookmark.searchList.find(input => input.search == vm.bookmarkSearch);
       if (found) {
         found.qty++;
       } else {
-        bookmark.searchList.push({search: vm.search, qty: 1});
+        bookmark.searchList.push({search: vm.bookmarkSearch, qty: 1});
       }
       
       saveStorageBookmarks();
@@ -82,10 +83,10 @@ controller('BookmarkController', function BookmarkController($scope) {
     let arrTags = vm.newItem.tags || [];
     vm.newItem.tags = arrTags;
 
-    if (vm.newItem.tagSelection == '9999') {
-      vm.newItem.tags.push(vm.newItem.inputNewTag);
+    if (vm.tagSelection == '9999') {
+      vm.newItem.tags.push(vm.inputNewTag);
     } else {
-      vm.newItem.tags.push(vm.tags[vm.newItem.tagSelection].name);
+      vm.newItem.tags.push(vm.tags[vm.tagSelection].name);
     }
     // item.tags vm.tags[item.tagSelection];
   }
