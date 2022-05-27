@@ -1,19 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 body {
-  font-family: Verdana;
+  font-family: 'Roboto', sans-serif;
   box-sizing: border-box;
-}
-.container {
-  margin-left: 5px;
-  margin-right: 5px;
-  max-width: 800px;
-  margin: auto;
+  background-color: #e1e5f2;
+  margin: 0;
 }
 
-.header {
+header {
+  background-color: #022b3a;
+  color: #fff;
+  height: 20vh;
+}
+
+header h1 {
+  margin: 0;
   text-align: center;
-  font-weight: 900;
-  font-size: 2rem;
-  height: 80px;
+  padding-top: 3rem;
+  font-size: 2.3rem;
+}
+
+main {
+  max-width: 900px;
+  margin: auto;
+  margin-top: -3rem;
+  background-color: #FFF;
+  padding: 2rem;
+  border-radius: 15px;
 }
 
 .edit-tags {
@@ -31,6 +44,7 @@ body {
 
 .edit-tags .command {
   cursor: pointer;
+  transition: .3s;
 }
 
 .edit-tags .command:hover {
@@ -39,28 +53,35 @@ body {
 }
 
 .tags {
-  /* height: 40px; */
-  background-color: lightblue;
-  margin-bottom: 10px;
-  /* overflow: auto; */
+  color: #1f7a8c;
+  background-color: #f5f6f7;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  
+}
+
+.tags p {
+  margin: 0;
+  font-weight: bold;
+  display: inline-block;
 }
 
 .tags .button {
-  font-size: .6rem;
-  background-color: #d4d4da;
   display: inline;
   margin: 3px;
-  padding: 2px 4px;
+  padding: 2px 3px;
   border-radius: 4px;
   cursor: pointer;
+  font-size: .7rem;
 }
 
 .tags .button.selected {
-  background-color: #b2afd6;
+  background-color: #e1e5f2;
 }
 
 .tags .button .command {
-  font-size: .5rem;
+  
   /* font-size: .6rem;
   background-color: #b2afd6;
   display: inline;
@@ -70,19 +91,94 @@ body {
 }
 
 .input {
-  height: 40px;
-  background-color: lightblue;
-  margin-bottom: 10px;
   max-width: 600px;
   margin: auto;
   padding: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 2rem;
+  height: 11vh;
+  
+}
 
-}
 .input input {
-  width: 98%;
+  width: 100%;
   margin: auto;
+  padding: .8rem;
+  border-radius: 10px;
+  border: none;
+  background-color: #eff1f3;
+  font-family: inherit;
+  font-size: 1rem;
+  margin-bottom: 2rem;
 }
+
+.input-actions {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.input-actions button{
+  padding: .7rem;
+  background-color: #217d92;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: .3s;
+  cursor: pointer;
+}
+
+.input-actions button:hover, .add-new input[type="button"]:hover {
+  background-color: #154955;
+}
+
+.add-new {
+  min-height: 21vh;
+  color: #1f7a8c;
+  font-weight:  bold;
+}
+
+.add-new label {
+  margin-right: .5rem;
+}
+
+.add-new input[type="text"] {
+  border: none;
+  background-color: #eff1f3;
+  padding: .4rem;
+  margin-bottom: .8rem;
+  border-radius: 4px;
+  font-size: .9rem;
+}
+
+/* .add-new input[type="select"] {
+
+} */
+
+.add-new input[type="button"] {
+  padding: .3rem .5rem;
+  background-color: #217d92;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: .8rem;
+  font-weight: bold;
+  transition: .3s;
+  cursor: pointer;
+}
+
+.add-new input[value="Save"] {
+  margin: 1rem 0 2rem;
+}
+
+.add-new input[value="Add Tag"] {
+  margin-left: 1rem;
+}
+
+.add-new .edit-tags {
+  display: inline-block;
+}
+
 
 .result {
   margin-bottom: 10px;
@@ -99,9 +195,6 @@ body {
   cursor: pointer;
   /* border: 1px solid red; */
 }
-.result div {
-  /* border: 1px solid red; */
-}
 
 .result .row .bookmark-url {
   font-size: 0.7rem;
@@ -114,6 +207,7 @@ body {
   margin-bottom: 5px;
   /* border: 1px solid red; */
 }
+
 .result .row .bookmark-title .content {
   float: left;
   /* border: 1px solid blue; */
@@ -121,6 +215,7 @@ body {
 .result .row .bookmark-title .actions {
   float: right;
   font-size: 0.54rem;
+
   /* border: 1px solid blue; */
 }
 .result .row .bookmark-title .actions:hover {
@@ -130,9 +225,6 @@ body {
   /* border: 1px solid blue; */
 }
 
-.row .spotlight {
-  font-weight: 800;
-}
 .row.selected {
   background-color: rgb(200 199 255 / 38%)
 }
@@ -151,21 +243,12 @@ body {
   margin-bottom: 5px;
   font-size: 0.65rem;
 }
-a {
-  color: #1a0dab;
-}
-a:link {
+
+
+a:link, a:visited {
   text-decoration: none;
 }
 
-a:visited {
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-a:active {
+a:hover, a:active {
   text-decoration: underline;
 }
