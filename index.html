@@ -50,7 +50,7 @@
               <option value="9999">* Add new tag</option>
               <option ng-repeat="tag in filterOnlyUnused(tags, newItem.tags) track by $index" value="{{$index}}">{{tag.name}}</option>
             </select>
-            <input ng-if="tagSelection == 9999" id="tags" type="text" ng-model="inputNewTag"><input type="button" ng-click="addTag()" value="Add Tag">
+            <input ng-if="tagSelection == 9999" id="tags" type="text" ng-model="newItemTag.inputNewTag"><input type="button" ng-click="addTag(tagSelection)" value="Add Tag">
           </div>
           <div class="input-button"><input type="button" value="Save" ng-click="saveItem(newItem)"></div>
         </div>

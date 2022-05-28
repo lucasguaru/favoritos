@@ -7,6 +7,10 @@ controller('BookmarkController', function BookmarkController($scope) {
   vm.newItem = {};
   vm.newMode = false;
   vm.editMode = false;
+  vm.tagSelection = 0;
+  vm.newItemTag = {
+    inputNewTag: ""
+  }
 
   let bookmarks = loadStorageBookmarks();
   if (!bookmarks) {
@@ -79,14 +83,15 @@ controller('BookmarkController', function BookmarkController($scope) {
     return allTags.filter(t => !alreadySelectedTags.includes(t.name));
   }
 
-  vm.addTag = function() {
+  vm.addTag = function(tagSelection) {
     let arrTags = vm.newItem.tags || [];
     vm.newItem.tags = arrTags;
 
-    if (vm.tagSelection == '9999') {
-      vm.newItem.tags.push(vm.inputNewTag);
+    if (tagSelection == '9999') {
+      vm.newItem.tags.push(vm.newItemTag.inputNewTag);
     } else {
-      vm.newItem.tags.push(vm.tags[vm.tagSelection].name);
+      let filteredTags = vm.filterOnlyUnused(vm.tags, vm.newItem.tags);
+      vm.newItem.tags.push(filteredTags[tagSelection].name);
     }
     // item.tags vm.tags[item.tagSelection];
   }
