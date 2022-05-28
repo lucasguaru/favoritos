@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="bookmarkApp">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bookmark</title>
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js"></script>
+  <script src="app/app.js"></script>
+  <script src="app/contains.function.js"></script>
+  <script src="app/byInput.filter.js"></script>
+  <script src="app/colorByInput.filter.js"></script>
+  <script src="app/bookmark.controller.js"></script>
+</head>
+<script>
+
+
+</script>
+<body ng-controller="BookmarkController">
+  <div class="container">
+    <header>
+      <h1>
+      Bookmark
+      </h1>
+    </header>
+    <main>
+      <div class="search">
+        <div class="tags">
+          <p>Tags:</p>
+          <div class="button" ng-class="{'selected': tag.selected}" ng-repeat="tag in tags track by $index" ng-click="selectHotkey(tag)">{{tag.name}} <span class="command">[alt + {{$index + 1}}]</div></button>
+        </div>
+        <div class="input">
+          <input id="bookmarkSearch" type="text" placeholder="Type your search" ng-model="bookmarkSearch" ng-keyup="filter($event)">
+          <div class="input-actions">
+            <button ng-click="newMode=true">Add New</button>
+            <button ng-click="export()">Export</button>
+          </div>
+        </div>
+        <div ng-if="newMode || editMode" id="addNewDiv" class="add-new">
+          <div class="input-row"><label for="title">Title: </label><input id="title" type="text" ng-model="newItem.title"></div>
+          <div class="input-row"><label for="url">URL: </label><input id="title" type="text" ng-model="newItem.url"></div>
+          <div class="input-row"><label for="description">Description: </label><input id="description" type="text" ng-model="newItem.description"></div>
+          <div class="input-row">
+            <label for="tags">Tags: </label>
+            <div class="edit-tags"><div class="tag" ng-repeat="tag in newItem.tags track by $index">{{tag}} <span class="command" ng-click="deleteTagItem($index)">[X]</span></div></div>
+            <select name="tagSelection" id="tagSelection" ng-model="tagSelection">
+              <option value="9999">* Add new tag</option>
+              <option ng-repeat="tag in filterOnlyUnused(tags, newItem.tags) track by $index" value="{{$index}}">{{tag.name}}</option>
+            </select>
+            <input ng-if="tagSelection == 9999" id="tags" type="text" ng-model="newItemTag.inputNewTag"><input type="button" ng-click="addTag(tagSelection)" value="Add Tag">
+          </div>
+          <div class="input-button"><input type="button" value="Save" ng-click="saveItem(newItem)"></div>
+        </div>
+      </div>
+      <div class="result">
+        <div class="row" ng-click="openPage(bookmark)" ng-class="{'selected': $index == selected}" ng-repeat="bookmark in filteredBookmarks track by $index">
+          <div class="bookmark-url">{{bookmark.url}}</div>
+          <div class="bookmark-title"><div class="content" ng-bind-html="bookmark.title | colorByInput:bookmarkSearch"></div><div class="actions" ng-click="edit($event, $index)">[Edit]</div></div>
+          <div class="bookmark-description">{{bookmark.description}}</div>
+          <div class="bookmark-tag">Tags: {{bookmark.tags}}</div>
+        </div>
+      </div>
+  </main>
+  </div>
+</body>
+<script>
+  window.onload = function() {
+    document.getElementById("bookmarkSearch").focus();
+  }
+</script>
+</html>
