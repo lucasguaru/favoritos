@@ -74,7 +74,10 @@ controller('BookmarkController', function BookmarkController($scope) {
   }
 
   vm.filter = function(event) {
-    if (event && vm.isCommandKey(event)) return;
+    if (event && vm.isCommandKey(event)) {
+      event.preventDefault();
+      return;
+    };
     vm.filteredBookmarks = filterByInput(vm.bookmarks, vm.bookmarkSearch, getSelectedTags());
     vm.selected = 0;
   }
