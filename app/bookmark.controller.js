@@ -83,6 +83,7 @@ controller('BookmarkController', function BookmarkController($scope) {
   }
 
   vm.filterOnlyUnused = function(allTags, alreadySelectedTags) {
+    if (!alreadySelectedTags || !alreadySelectedTags.length) return allTags;
     return allTags.filter(t => !alreadySelectedTags.includes(t.name));
   }
 
