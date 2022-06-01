@@ -161,10 +161,8 @@ controller('BookmarkController', function BookmarkController($scope) {
   function loadTags(bookmarks) {
     let tags = [];
     bookmarks.forEach(b => {
-      if (Array.isArray(b.tags)) {
+      if (b.tags && Array.isArray(b.tags) && b.tags.length) {
         tags = tags.concat(b.tags.map(t => ({name: t, selected: false})));
-      } else {
-        tags.push({name: b.tags, selected: false});
       }
     });
     return [...new Set(tags)];
