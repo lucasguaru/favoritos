@@ -162,10 +162,11 @@ controller('BookmarkController', function BookmarkController($scope) {
     let tags = [];
     bookmarks.forEach(b => {
       if (b.tags && Array.isArray(b.tags) && b.tags.length) {
-        tags = tags.concat(b.tags.map(t => ({name: t, selected: false})));
+        tags = tags.concat(b.tags);
+        // tags = tags.concat(b.tags.map(t => ({name: t, selected: false})));
       }
     });
-    return [...new Set(tags)];
+    return [...new Set(tags)].map(t => ({name: t, selected: false}));
   }
 
   function saveStorageBookmarks() {
