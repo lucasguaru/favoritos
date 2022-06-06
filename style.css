@@ -10,23 +10,23 @@ body {
 header {
   background-color: #022b3a;
   color: #fff;
-  height: 20vh;
+  /* height: 114px; */
 }
 
 header h1 {
   margin: 0;
   text-align: center;
-  padding-top: 3rem;
+  padding: 10px;
   font-size: 2.3rem;
 }
 
 main {
   max-width: 900px;
   margin: auto;
-  margin-top: -3rem;
+  /* margin-top: -3rem; */
   background-color: #FFF;
-  padding: 2rem;
-  border-radius: 15px;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .edit-tags {
@@ -56,8 +56,8 @@ main {
   color: #1f7a8c;
   background-color: #f5f6f7;
   border-radius: 10px;
-  padding: 1rem;
-  margin-bottom: 2rem;
+  padding: 10px;
+  margin-bottom: 10px;
   
 }
 
@@ -91,12 +91,11 @@ main {
 }
 
 .input {
-  max-width: 600px;
+  /* max-width: 600px; */
   margin: auto;
   padding: 5px;
-  margin-bottom: 2rem;
-  height: 11vh;
-  
+  margin-bottom: 10px;
+  /* height: 11vh; */
 }
 
 .input input {
@@ -108,7 +107,7 @@ main {
   background-color: #eff1f3;
   font-family: inherit;
   font-size: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 10px;
 }
 
 .input-actions {
