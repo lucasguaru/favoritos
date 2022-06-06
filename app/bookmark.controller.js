@@ -30,6 +30,9 @@ controller('BookmarkController', function BookmarkController($scope) {
     vm.newItem = {};
     vm.newMode = false;
     vm.editMode = false;
+
+    vm.filter();
+    vm.tags = loadTags(vm.filteredBookmarks);
   }
 
   vm.edit = function(event, index) {
@@ -159,7 +162,7 @@ controller('BookmarkController', function BookmarkController($scope) {
   }
 
   function loadTags(bookmarks) {
-    let tags = [];
+    let tags = ["Arquitetura", "Confluence", "Bitbucket", "Swagger"];
     bookmarks.forEach(b => {
       if (b.tags && Array.isArray(b.tags) && b.tags.length) {
         tags = tags.concat(b.tags);
@@ -174,8 +177,16 @@ controller('BookmarkController', function BookmarkController($scope) {
   }
 
   function loadStorageBookmarks() {
-    const bookmarks = localStorage.getItem("bookmarks");
-    console.log(`localStorage.setItem("bookmarks", ${bookmarks})`);
+    let url = window.location.href;
+    let hasProjectName = url.includes("#");
+    let bookmarkName = "bookmarks";
+    if (hasProjectName) {
+      let posHashtag = url.indexOf("#");
+      let projectName = url.substring(posHashtag + 1);
+      bookmarkName += "-" + projectName;
+    }
+    const bookmarks = localStorage.getItem(bookmarkName);
+    // console.log(`localStorage.setItem("bookmarks", JSON.stringify(${bookmarks}))`);
     return bookmarks;
   }
 
