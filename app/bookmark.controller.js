@@ -162,7 +162,8 @@ controller('BookmarkController', function BookmarkController($scope) {
   }
 
   function loadTags(bookmarks) {
-    let tags = ["Arquitetura", "Confluence", "Bitbucket", "Swagger"];
+    let storageTags = localStorage.getItem("tags")
+    let tags = storageTags ? JSON.parse(storageTags) : [];
     bookmarks.forEach(b => {
       if (b.tags && Array.isArray(b.tags) && b.tags.length) {
         tags = tags.concat(b.tags);
