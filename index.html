@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="bookmarkApp">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bookmark 0.0.3</title>
-  <link rel="stylesheet" href="style.css">
-  
+  <!-- <link rel="stylesheet" href="style.css"> -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js"></script>
@@ -20,56 +23,123 @@
 
 
 </script>
+
 <body ng-controller="BookmarkController">
-  <div class="container">
-    <header>
-      <h1>
-      Bookmark
-      </h1>
-    </header>
-    <main>
-      <div class="search">
+  <header class="p-3 text-bg-dark">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <h1>Favorites</h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <!-- <li><a href="#" class="nav-link px-2 text-secondary">Bookmark</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">Code</a></li> -->
+          <!-- <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">About</a></li> -->
+        </ul>
+
+        <!-- <form class="col-12 col-lg-auto mb-6 mb-lg-0 me-lg-6" role="search">
+          <input id="bookmarkSearch" type="search" class="form-control form-control-dark text-bg-dark" style="width:700px"
+            placeholder="Search..." aria-label="Search" ng-model="bookmarkSearch"
+            ng-keyup="filter($event)">
+        </form> -->
+
+        <!-- <div class="text-end">
+          <button type="button" class="btn btn-outline-light me-2">Login</button>
+          <button type="button" class="btn btn-warning">Sign-up</button>
+        </div> -->
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="container">
+      <div class="search" style="margin-top:22px">
+        <div class="input-group mb-3">
+          <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">All</button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">All</a></li>
+            <li><a class="dropdown-item" href="#">Bookmark</a></li>
+            <li><a class="dropdown-item" href="#">Code</a></li>
+          </ul>
+          <input id="bookmarkSearch" type="search" class="form-control" placeholder="Search..." aria-label="Search">
+        </div>
         <div class="tags">
           <p>Tags:</p>
-          <div class="button" ng-class="{'selected': tag.selected}" ng-repeat="tag in tags track by $index" ng-click="selectHotkey(tag)">{{tag.name}} <span class="command">[alt + {{$index + 1}}]</div></button>
+          <div class="button" ng-class="{'selected': tag.selected}" ng-repeat="tag in tags track by $index"
+            ng-click="selectHotkey(tag)">{{tag.name}} <span class="command">[alt + {{$index + 1}}]</div></button>
         </div>
         <div class="input">
-          <input id="bookmarkSearch" type="text" placeholder="Type your search" ng-model="bookmarkSearch" ng-keyup="filter($event)">
+          <!-- <input  type="text" placeholder="Type your search" ng-model="bookmarkSearch"
+            ng-keyup="filter($event)"> -->
           <div class="input-actions">
             <button ng-click="newMode=true">Add New</button>
             <button ng-click="export()">Export</button>
           </div>
         </div>
-        <div ng-if="newMode || editMode" id="addNewDiv" class="add-new">
-          <div class="input-row"><label for="title">Title: </label><input id="title" type="text" ng-model="newItem.title"></div>
-          <div class="input-row"><label for="url">URL: </label><input id="title" type="text" ng-model="newItem.url"></div>
-          <div class="input-row"><label for="description">Description: </label><input id="description" type="text" ng-model="newItem.description"></div>
-          <div class="input-row">
-            <label for="tags">Tags: </label>
-            <div class="edit-tags"><div class="tag" ng-repeat="tag in newItem.tags track by $index">{{tag}} <span class="command" ng-click="deleteTagItem($index)">[X]</span></div></div>
-            <select name="tagSelection" id="tagSelection" ng-model="tagSelection">
-              <option value="9999">* Add new tag</option>
-              <option ng-repeat="tag in filterOnlyUnused(tags, newItem.tags) track by $index" value="{{$index}}">{{tag.name}}</option>
-            </select>
-            <input ng-if="tagSelection == 9999" id="tags" type="text" ng-model="newItemTag.inputNewTag"><input type="button" ng-click="addTag(tagSelection)" value="Add Tag">
+        <div ng-if="newMode || editMode" id="addNewDiv" style="margin-top:22px">
+          <div class="mb-3 row">
+            <label for="title" class="col-sm-1 col-form-label">Title:</label>
+            <div class="col-sm-11">
+              <input id="title" type="text" class="form-control" ng-model="newItem.title">
+            </div>
           </div>
-          <div class="input-button"><input type="button" value="Save" ng-click="saveItem(newItem)"></div>
+          <div class="mb-3 row">
+            <label for="url" class="col-sm-1 col-form-label">URL:</label>
+            <div class="col-sm-11">
+              <input id="url" type="text" class="form-control" ng-model="newItem.url">
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="tags" class="col-sm-1 col-form-label">Tags:</label>
+            <div class="tag" ng-repeat="tag in newItem.tags track by $index">{{tag}} <span class="command"
+              ng-click="deleteTagItem($index)">[X]</span></div>
+            <div class="col-sm-11">
+              <select name="tagSelection" id="tagSelection" ng-model="tagSelection">
+                <option value="9999">* Add new tag</option>
+                <option ng-repeat="tag in filterOnlyUnused(tags, newItem.tags) track by $index" value="{{$index}}">
+                  {{tag.name}}</option>
+              </select>
+              <input ng-if="tagSelection == 9999" id="tags" type="text" ng-model="newItemTag.inputNewTag"><input
+                type="button" ng-click="addTag(tagSelection)" value="Add Tag">
+                <div class="input-button"><input type="button" value="Save" ng-click="saveItem(newItem)"></div>
+            </div>
+          </div>
+
+          <div class="input-row">
+
+            
+          </div>
         </div>
       </div>
       <div class="result">
-        <div class="row" ng-click="openPage(bookmark)" ng-class="{'selected': $index == selected}" ng-repeat="bookmark in filteredBookmarks track by $index">
+        <div class="card">
+          <div class="card-body" style="cursor:pointer">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+        <div class="row" ng-click="openPage(bookmark)" ng-class="{'selected': $index == selected}"
+          ng-repeat="bookmark in filteredBookmarks track by $index">
           <div class="bookmark-url">{{bookmark.url}}</div>
-          <div class="bookmark-title"><div class="content" ng-bind-html="bookmark.title | colorByInput:bookmarkSearch"></div><div class="actions" ng-click="edit($event, $index)">[Edit]</div></div>
+          <div class="bookmark-title">
+            <div class="content" ng-bind-html="bookmark.title | colorByInput:bookmarkSearch"></div>
+            <div class="actions" ng-click="edit($event, $index)">[Edit]</div>
+          </div>
           <div class="bookmark-description">{{bookmark.description}}</div>
           <div class="bookmark-tag">Tags: {{bookmark.tags}}</div>
         </div>
       </div>
+    </div>
   </main>
-  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
 </body>
 <script>
-  window.onload = function() {
+  window.onload = function () {
     document.getElementById("bookmarkSearch").focus();
   }
 </script>
+
 </html>

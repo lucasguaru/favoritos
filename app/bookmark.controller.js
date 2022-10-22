@@ -5,7 +5,7 @@ controller('BookmarkController', function BookmarkController($scope) {
   vm.bookmarkSearch = "";
   vm.selected = 0;
   vm.newItem = {};
-  vm.newMode = false;
+  vm.newMode = true; //false
   vm.editMode = false;
   vm.tagSelection = 0;
   vm.newItemTag = {
